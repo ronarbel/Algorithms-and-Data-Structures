@@ -42,6 +42,31 @@ class SinglyLinkedList {
     }
     return popped;
   }
+
+  shift() {
+    if (!this.head) return undefined;
+    const oldHead = this.head;
+    const newHead = this.head.next || null;
+    this.head = newHead;
+    this.length -= 1;
+    if (!this.length) {
+      this.tail = null;
+    }
+
+    return oldHead;
+  }
+
+  unshift(val) {
+    const node = new Node(val);
+    if (!this.head) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      node.next = this.head;
+      this.head = node;
+    }
+    this.length += 1;
+  }
 }
 
 const list = new SinglyLinkedList();
