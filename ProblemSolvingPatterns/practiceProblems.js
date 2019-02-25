@@ -115,25 +115,19 @@ function findLongestSubstring(s) {
   return maxSub;
 }
 
-// -------- optimized -------- //
-function findLongestSubstring(str) {
-  let longest = 0;
-  let seen = {};
-  let start = 0;
- 
-  for (let i = 0; i < str.length; i++) {
-    let char = str[i];
-    if (seen[char]) {
-      start = Math.max(start, seen[char] + 1);
+// -------- large to smaller early termination sliding window -------- //
+function findLongestSubstring (s) {
+  let win = s.length;
+  while (win > 0) {
+    let start = 0;
+    while (start + win <= s.length) {
+      const seen = new Set(s.slice(start, start + win));
+      if (seen.size === win) {
+        return win;
+      }
+      start += 1;
     }
-    // index - beginning of substring + 1 (to include current in count)
-    longest = Math.max(longest, i - start + 1);
-    // store the index of the next char so as to not double count
-    seen[char] = i;
+    win -= 1;
   }
-  return longest;
+  return 0;
 }
-
-
-
-console.log(findLongestSubstring('longestsubstring'));
