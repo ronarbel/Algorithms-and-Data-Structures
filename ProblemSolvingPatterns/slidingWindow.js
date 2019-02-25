@@ -39,3 +39,21 @@ assert.equal(maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 4), 17);
 assert.equal(maxSubarraySum([4, 2, 1, 6], 1), 6);
 assert.equal(maxSubarraySum([4, 2, 1, 6, 2], 4), 13);
 assert.equal(maxSubarraySum([], 4), null);
+
+
+// -------- large to smaller early termination sliding window -------- //
+function findLongestSubstring (s) {
+  let win = s.length;
+  while (win > 0) {
+    let start = 0;
+    while (start + win <= s.length) {
+      const seen = new Set(s.slice(start, start + win));
+      if (seen.size === win) {
+        return win;
+      }
+      start += 1;
+    }
+    win -= 1;
+  }
+  return 0;
+}
