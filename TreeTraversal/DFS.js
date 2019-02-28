@@ -54,7 +54,6 @@ class BST {
   }
 
   BFS() {
-    if (!this.root) return undefined;
     const result = [];
     const queue = [this.root];
     while (queue.length) {
@@ -67,7 +66,6 @@ class BST {
   }
 
   DFSPreOrder() {
-    if (!this.root) return undefined;
     const result = [];
     const dive = (node) => {
       result.push(node.value);
