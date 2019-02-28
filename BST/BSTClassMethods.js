@@ -35,6 +35,23 @@ class BST {
       }
     }
   }
+
+  find(v) {
+    if (!this.root) return false;
+    let current = this.root;
+    while (true) {
+      if (current.value === v) return true;
+      if (!current.right && !current.left) return false;
+      if (v < current.value) {
+        if (!current.left) return false;
+        current = current.left;
+      }
+      if (v > current.value) {
+        if (!current.right) return false;
+        current = current.right;
+      }
+    }
+  }
 }
 
 const tree = new BST();
@@ -47,4 +64,5 @@ tree.insert(2);
 tree.insert(7);
 tree.insert(1);
 
-console.log(tree);
+console.log(tree.find(4));
+
