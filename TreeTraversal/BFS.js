@@ -65,6 +65,18 @@ class BST {
     }
     return result;
   }
+
+  DFSPreOrder() {
+    if (!this.root) return undefined;
+    const result = [];
+    const dive = (node) => {
+      result.push(node.value);
+      if (node.left) dive(node.left);
+      if (node.right) dive(node.right);
+    };
+    dive(this.root);
+    return result;
+  }
 }
 
 const tree = new BST();
@@ -77,4 +89,4 @@ tree.insert(2);
 tree.insert(7);
 tree.insert(1);
 
-console.log(tree.BFS());
+console.log(tree.DFSPreOrder());
