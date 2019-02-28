@@ -65,4 +65,3 @@ tree.insert(7);
 tree.insert(1);
 
 console.log(tree.find(4));
-
