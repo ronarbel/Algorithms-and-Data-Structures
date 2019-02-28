@@ -15,29 +15,23 @@ class BST {
     const newNode = new Node(v);
     if (!this.root) {
       this.root = newNode;
-      return this.root;
+      return this;
     }
     let current = this.root;
-    let set = false;
-    while (!set) {
+    while (true) {
+      if (newNode.value === current.value) return undefined;
       if (newNode.value > current.value) {
-        if (current.right) {
-          current = current.right;
-        } else {
+        if (!current.right) {
           current.right = newNode;
-          set = true;
-          return this.root;
+          return this;
         }
+        current = current.right;
       } else if (newNode.value < current.value) {
-        if (current.left) {
-          current = current.left;
-        } else {
+        if (!current.left) {
           current.left = newNode;
-          set = true;
-          return this.root;
+          return this;
         }
-      } else {
-        return this.root;
+        current = current.left;
       }
     }
   }
