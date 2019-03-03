@@ -75,6 +75,17 @@ class BST {
     dive(this.root);
     return result;
   }
+
+  DFSPostOrder() {
+    const result = [];
+    const dive = (node) => {
+      if (node.left) dive(node.left);
+      if (node.right) dive(node.right);
+      result.push(node.value);
+    };
+    dive(this.root);
+    return result;
+  }
 }
 
 const tree = new BST();
@@ -88,3 +99,4 @@ tree.insert(7);
 tree.insert(1);
 
 console.log(tree.DFSPreOrder());
+console.log(tree.DFSPostOrder());
