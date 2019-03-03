@@ -86,6 +86,17 @@ class BST {
     dive(this.root);
     return result;
   }
+
+  DFSInOrder() {
+    const result = [];
+    const dive = (node) => {
+      if (node.left) dive(node.left);
+      result.push(node.value);
+      if (node.right) dive(node.right);
+    };
+    dive(this.root);
+    return result;
+  }
 }
 
 const tree = new BST();
