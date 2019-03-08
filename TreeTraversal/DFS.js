@@ -76,6 +76,19 @@ class BST {
     return result;
   }
 
+  DFSPreOrderIterative() {
+    const stack = [this.root];
+    const result = [];
+    console.log(stack)
+    while (stack.length) {
+      const cur = stack.pop();
+      result.push(cur.value);
+      if (cur.right) stack.push(cur.right);
+      if (cur.left) stack.push(cur.left);
+    }
+    return result;
+  }
+
   DFSPostOrder() {
     const result = [];
     const dive = (node) => {
@@ -109,5 +122,11 @@ tree.insert(2);
 tree.insert(7);
 tree.insert(1);
 
+/*
+          5
+       2     8
+    1      7   9
+*/
+
 console.log(tree.DFSPreOrder());
-console.log(tree.DFSPostOrder());
+console.log(tree.DFSPreOrderIterative());
