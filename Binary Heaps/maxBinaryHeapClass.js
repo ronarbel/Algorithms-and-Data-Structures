@@ -5,6 +5,10 @@ class MaxBinaryHeap {
 
   insert(v) {
     this.values.push(v);
+    this.bubbleUp();
+  }
+
+  bubbleUp() {
     let insertIndex = this.values.length - 1;
     let parentIndex = Math.floor((insertIndex - 1) / 2);
     while (this.values[insertIndex] > this.values[parentIndex]) {
@@ -26,5 +30,8 @@ heap.insert(18);
 heap.insert(27);
 heap.insert(12);
 heap.insert(55);
+heap.insert(18);
+heap.insert(55);
+heap.insert(33);
 
 console.log(heap);
