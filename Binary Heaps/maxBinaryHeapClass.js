@@ -9,15 +9,46 @@ class MaxBinaryHeap {
   }
 
   bubbleUp() {
-    let insertIndex = this.values.length - 1;
-    let parentIndex = Math.floor((insertIndex - 1) / 2);
-    while (this.values[insertIndex] > this.values[parentIndex]) {
-      let tempParent = this.values[parentIndex];
-      this.values[parentIndex] = this.values[insertIndex];
-      this.values[insertIndex] = tempParent;
+    let insertIdx = this.values.length - 1;
+    let parentIdx = Math.floor((insertIdx - 1) / 2);
+    while (this.values[insertIdx] > this.values[parentIdx]) {
+      let tempParent = this.values[parentIdx];
+      this.values[parentIdx] = this.values[insertIdx];
+      this.values[insertIdx] = tempParent;
 
-      insertIndex = parentIndex;
-      parentIndex = Math.floor((insertIndex - 1) / 2);
+      insertIdx = parentIdx;
+      parentIdx = Math.floor((insertIdx - 1) / 2);
+    }
+  }
+
+  extractMax() {
+    const max = this.values[0];
+    const end = this.values.pop();
+    this.values[0] = end;
+    this.bubbleDown();
+    return max;
+  }
+
+  // REFACTOR left right val check, swap greater child val;
+  bubbleDown() {
+    let bubbleDownIdx = 0;
+    let leftChildIdx = (2 * bubbleDownIdx) + 1;
+    let rightChildIdx = (2 * bubbleDownIdx) + 2;
+
+    let bubbleVal = this.values[bubbleDownIdx];
+    let leftVal = this.values[leftChildIdx];
+    let rightVal = this.values[rightChildIdx];
+
+    while (bubbleVal < leftVal || bubbleVal < rightVal) {
+      if (bubbleVal < leftVal) {
+        this.values[leftChildIdx] = bubbleVal;
+        this.values[bubbleDownIdx] = leftVal;
+        bubbleDownIdx = leftChildIdx;
+      } else {
+        this.values[rightChildIdx] = bubbleVal;
+        this.values[bubbleDownIdx] = rightVal;
+        bubbleDownIdx = rightChildIdx;
+      }
     }
   }
 }
