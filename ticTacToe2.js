@@ -11,7 +11,9 @@ let player = 'X';
 
 let win = false;
 
-const board = [
+let playableMoves = 9;
+
+let board = [
   ['1', '2', '3'],
   ['4', '5', '6'],
   ['7', '8', '9'],
@@ -36,6 +38,7 @@ const playMove = (move) => {
     for (let j = 0; j < 3; j += 1) {
       if (board[i][j] === move) {
         board[i][j] = player.slice();
+        playableMoves -= 1;
         swapPlayer();
       }
     }
@@ -70,11 +73,27 @@ const checkWin = () => {
   checkDiag();
 };
 
-const endGame = () => {
-  swapPlayer();
+const endWinGame = () => {
   printBoard();
-  console.log(`Game over! ${player} wins!`)
+  swapPlayer();
+  console.log(`Game over! ${player} wins!`);
   rl.close();
+};
+
+const endTieGame = () => {
+  printBoard();
+  console.log('Tie game!');
+  rl.close();
+};
+
+const restartGame = () => {
+  player = 'X';
+
+  board = [
+    ['1', '2', '3'],
+    ['4', '5', '6'],
+    ['7', '8', '9'],
+  ];
 };
 
 const promptPlayer = () => {
@@ -83,12 +102,13 @@ const promptPlayer = () => {
     playMove(newMove);
     checkWin();
 
-    // if (win) {
-    //   endGame();
-    // } else {
-    //   promptPlayer();
-    // }
-    win ? endGame() : promptPlayer()
+    if (win) {
+      endWinGame();
+    } else if (!playableMoves) {
+      endTieGame();
+    } else {
+      promptPlayer();
+    }
   });
 };
 
