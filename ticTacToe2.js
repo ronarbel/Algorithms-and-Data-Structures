@@ -73,7 +73,7 @@ const checkWin = () => {
 const endGame = () => {
   swapPlayer();
   printBoard();
-  console.log(`${player} wins! Game over1`)
+  console.log(`Game over! ${player} wins!`)
   rl.close();
 };
 
@@ -83,11 +83,12 @@ const promptPlayer = () => {
     playMove(newMove);
     checkWin();
 
-    if (win) {
-      endGame();
-    } else {
-      promptPlayer();
-    }
+    // if (win) {
+    //   endGame();
+    // } else {
+    //   promptPlayer();
+    // }
+    win ? endGame() : promptPlayer()
   });
 };
 
