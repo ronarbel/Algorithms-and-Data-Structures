@@ -86,7 +86,6 @@ const endTieGame = () => {
 const promptPlayer = () => {
   printBoard();
   rl.question(`${player}'s turn, please choose a number: `, (newMove) => {
-    console.log(newMove);
     playMove(newMove);
     checkWin();
 
