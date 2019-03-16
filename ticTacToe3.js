@@ -29,6 +29,8 @@ const printBoard = () => {
   console.log(board[2][0], '|', board[2][1], '|', board[2][2]);
 };
 
+const swapPlayer = () => player === 'X' ? player = 'O' : player = 'X';
+
 const playMove = (move) => {
   for (let i = 0; i < 3; i += 1) {
     for (let j = 0; j < 3; j += 1) {
@@ -45,8 +47,13 @@ const promptPlayer = () => {
   printBoard();
   rl.question(`${player}'s turn, please choose a number: `, (newMove) => {
     console.log(newMove);
-  
-    rl.close();
+    playMove(newMove);
+
+    if (win) {
+      rl.close();
+    } else {
+      promptPlayer();
+    }
   });
 };
 
