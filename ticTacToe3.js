@@ -91,7 +91,9 @@ const promptPlayer = () => {
     checkWin();
 
     if (win) {
-      rl.close();
+      endWinGame();
+    } else if (!playableMoves) {
+      endTieGame();
     } else {
       promptPlayer();
     }
