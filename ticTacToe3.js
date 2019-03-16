@@ -43,11 +43,39 @@ const playMove = (move) => {
   }
 };
 
+const checkWin = () => {
+  const checkRow = () => {
+    for (let i = 0; i < 3; i += 1) {
+      let row = board[i].toString();
+      if (row === 'X,X,X' || row === 'O,O,O') win = true;
+    }
+  };
+  const checkCol = () => {
+    for (let i = 0; i < 3; i += 1) {
+      let col = [board[0][i], board[1][i], board[2][i]].toString();
+      if (col === 'X,X,X' || col === 'O,O,O') win = true;
+    }
+  };
+
+  const checkDiag = () => {
+    let majDiag = [board[0][0], board[1][1], board[2][2]].toString();
+    let minDiag = [board[0][2], board[1][1], board[2][0]].toString();
+
+    if (majDiag === 'X,X,X' || majDiag === 'O,O,O') win = true;
+    if (minDiag === 'X,X,X' || minDiag === 'O,O,O') win = true;
+  };
+
+  checkRow();
+  checkCol();
+  checkDiag();
+};
+
 const promptPlayer = () => {
   printBoard();
   rl.question(`${player}'s turn, please choose a number: `, (newMove) => {
     console.log(newMove);
     playMove(newMove);
+    checkWin();
 
     if (win) {
       rl.close();
