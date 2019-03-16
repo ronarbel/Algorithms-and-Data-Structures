@@ -70,6 +70,13 @@ const checkWin = () => {
   checkDiag();
 };
 
+const endWinGame = () => {
+  printBoard();
+  swapPlayer();
+  console.log(`Game Over! ${player} wins!`);
+  rl.close();
+}
+
 const promptPlayer = () => {
   printBoard();
   rl.question(`${player}'s turn, please choose a number: `, (newMove) => {
