@@ -75,7 +75,13 @@ const endWinGame = () => {
   swapPlayer();
   console.log(`Game Over! ${player} wins!`);
   rl.close();
-}
+};
+
+const endTieGame = () => {
+  printBoard();
+  console.log('Tie game!');
+  rl.close();
+};
 
 const promptPlayer = () => {
   printBoard();
