@@ -5,8 +5,23 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-rl.question(`Question`, (answer) => {
-  console.log(answer);
+// -------- state -------- //
 
-  rl.close();
-});
+let player = 'X';
+
+let win = false;
+
+let playableMoves = 9;
+
+// -------- utils -------- //
+
+const promptPlayer = () => {
+  rl.question(`Question`, (answer) => {
+    console.log(answer);
+  
+    rl.close();
+  });
+}
+
+// -------- initialize game -------- //
+promptPlayer();
